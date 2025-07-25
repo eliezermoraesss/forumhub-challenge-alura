@@ -1,4 +1,4 @@
-package com.forumhub.Forum.Hub;
+package com.forumhub;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
