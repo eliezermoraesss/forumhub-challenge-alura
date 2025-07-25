@@ -8,25 +8,22 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity(name = "Usuario")
-@Table(name = "usuarios")
+@Entity(name = "Curso")
+@Table(name = "cursos")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario {
+public class Curso {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
 
     @Column(unique = true)
-    private String email;
-    private String senha;
+    private String nome;
+    private String categoria;
 
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Topico> topicos;
-
-    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
-    private List<Resposta> respostas;
 }

@@ -25,11 +25,12 @@ public class Topico {
     private LocalDate dataCriacao;
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name = "autor_id")
-    private Usuario autor;
     private String curso;
 
-    @OneToMany
+    @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL)
     private List<Resposta> respostas;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id")
+    private Usuario autor;
 }
