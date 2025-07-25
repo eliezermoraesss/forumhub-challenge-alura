@@ -1,5 +1,6 @@
 package com.forumhub.model;
 
+import com.forumhub.enums.Categoria;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -22,7 +23,9 @@ public class Curso {
 
     @Column(unique = true)
     private String nome;
-    private String categoria;
+
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
 
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
     private List<Topico> topicos;
