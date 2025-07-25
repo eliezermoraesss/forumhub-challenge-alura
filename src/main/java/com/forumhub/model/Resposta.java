@@ -7,26 +7,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
-@Table(name = "topicos")
+@Table(name = "respostas")
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
 @EqualsAndHashCode(of = "id")
-public class Topico {
+public class Resposta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String titulo;
     private String mensagem;
     private LocalDate dataCriacao;
-    private String status;
-    private String autor;
-    private String curso;
 
-    @OneToMany
-    private List<Resposta> respostas;
+    @ManyToOne
+    private Topico topico;
+    private String autor;
+
 }
