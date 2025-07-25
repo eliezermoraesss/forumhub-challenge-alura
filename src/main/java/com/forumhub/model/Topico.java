@@ -23,9 +23,14 @@ public class Topico {
     private String titulo;
     private String mensagem;
     private LocalDate dataCriacao;
+
+    @Column(name = "status_topico", nullable = false)
+    @Enumerated(EnumType.STRING)
     private String status;
 
-    private String curso;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "curso_id")
+    private Curso curso;
 
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL)
     private List<Resposta> respostas;
