@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@Entity
+@Entity(name = "Resposta")
 @Table(name = "respostas")
 @Getter
 @NoArgsConstructor
@@ -22,8 +22,11 @@ public class Resposta {
     private String mensagem;
     private LocalDate dataCriacao;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "topico_id")
     private Topico topico;
-    private String autor;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "autor_id")
+    private Usuario autor;
 }

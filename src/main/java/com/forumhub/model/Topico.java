@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
+@Entity(name = "Topico")
 @Table(name = "topicos")
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +24,10 @@ public class Topico {
     private String mensagem;
     private LocalDate dataCriacao;
     private String status;
-    private String autor;
+
+    @ManyToOne
+    @JoinColumn(name = "autor_id")
+    private Usuario autor;
     private String curso;
 
     @OneToMany
