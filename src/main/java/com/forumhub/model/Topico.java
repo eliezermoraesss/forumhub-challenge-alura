@@ -1,5 +1,6 @@
 package com.forumhub.model;
 
+import com.forumhub.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -26,7 +27,7 @@ public class Topico {
 
     @Column(name = "status_topico", nullable = false)
     @Enumerated(EnumType.STRING)
-    private String status;
+    private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso_id")
