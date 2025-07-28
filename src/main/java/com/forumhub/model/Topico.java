@@ -1,6 +1,5 @@
 package com.forumhub.model;
 
-import com.forumhub.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,14 +23,7 @@ public class Topico {
     private String titulo;
     private String mensagem;
     private LocalDate dataCriacao;
-
-    @Column(name = "status_topico", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Status status;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "curso_id")
-    private Curso curso;
+    private String status;
 
     @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL)
     private List<Resposta> respostas;
