@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity(name = "Curso")
 @Table(name = "cursos")
 @Getter
@@ -22,4 +24,7 @@ public class Curso {
 
     @Enumerated(value = EnumType.STRING)
     private Categoria categoria;
+
+    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
+    private List<Topico> topicos;
 }
