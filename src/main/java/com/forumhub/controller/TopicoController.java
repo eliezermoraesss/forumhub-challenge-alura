@@ -1,6 +1,7 @@
 package com.forumhub.controller;
 
-import com.forumhub.dto.DadosCadastroTopicoDto;
+import com.forumhub.dto.DadosCadastroTopico;
+import com.forumhub.dto.DadosDetalhamentoTopico;
 import com.forumhub.model.Topico;
 import com.forumhub.respository.TopicoRespository;
 import jakarta.validation.Valid;
@@ -21,15 +22,15 @@ public class TopicoController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroTopicoDto dados, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroTopico dados, UriComponentsBuilder uriBuilder) {
         var topico = new Topico(dados);
         repository.save(topico);
 
         var uri = uriBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoPaciente(topico));
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoTopico(topico));
     }
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<Page<DadosListagemPaciente>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
         var page = repository.findAll(paginacao).map(DadosListagemPaciente::new);
         return ResponseEntity.ok(page);
@@ -51,5 +52,5 @@ public class TopicoController {
         paciente.excluir();
 
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }

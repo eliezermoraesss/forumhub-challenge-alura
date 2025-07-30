@@ -1,6 +1,6 @@
 package com.forumhub.model;
 
-import com.forumhub.dto.DadosCadastroTopicoDto;
+import com.forumhub.dto.DadosCadastroTopico;
 import com.forumhub.enums.Status;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,12 +44,12 @@ public class Topico {
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
-    public Topico(DadosCadastroTopicoDto dadosDto) {
-        this.id = dadosDto.id();
+    public Topico(DadosCadastroTopico dadosDto) {
         this.titulo = dadosDto.titulo();
         this.mensagem = dadosDto.mensagem();
         this.dataCriacao = dadosDto.dataCriacao();
         this.status = dadosDto.status();
-        this.autor = new Usuario(); // Assuming you will set the author later
+        this.autor = new Usuario();
+        this.curso = new Curso();
     }
 }

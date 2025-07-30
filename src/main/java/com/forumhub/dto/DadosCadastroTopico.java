@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record DadosCadastroTopicoDto(
+public record DadosCadastroTopico(
 
         @NotBlank
         String titulo,
