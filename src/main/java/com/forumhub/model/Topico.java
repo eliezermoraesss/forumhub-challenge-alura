@@ -1,8 +1,10 @@
 package com.forumhub.model;
 
+import com.forumhub.dto.DadosAtualizarTopico;
 import com.forumhub.dto.DadosCadastroTopico;
 import com.forumhub.enums.Status;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,12 +46,28 @@ public class Topico {
     @JoinColumn(name = "curso_id")
     private Curso curso;
 
+    private Boolean ativo;
+
     public Topico(DadosCadastroTopico dadosDto) {
+        this.ativo = true;
         this.titulo = dadosDto.titulo();
         this.mensagem = dadosDto.mensagem();
         this.dataCriacao = dadosDto.dataCriacao();
         this.status = dadosDto.status();
         this.autor = new Usuario();
         this.curso = new Curso();
+    }
+
+    public void atualizarInformacoes(@Valid DadosAtualizarTopico dados) {
+        if (dados.titulo() != null) {
+            this.titulo = dados.titulo();
+        }
+        if (dados.mensagem() != null) {
+            this.mensagem = dados.mensagem();
+        }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

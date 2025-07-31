@@ -1,10 +1,8 @@
 package com.forumhub.model;
 
+import com.forumhub.dto.DadosCadastroUsuario;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +13,7 @@ import java.util.List;
 @Entity(name = "UsuarioRepository")
 @Table(name = "usuarios")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -33,6 +32,13 @@ public class Usuario implements UserDetails {
 
     @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     private List<Resposta> respostas;
+
+    public Usuario(DadosCadastroUsuario dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.senha = dados.senha();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_USER"));
